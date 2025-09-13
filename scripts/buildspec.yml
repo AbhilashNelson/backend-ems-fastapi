@@ -1,20 +1,15 @@
 version: 0.2
-
 phases:
   install:
     runtime-versions:
       python: 3.9
-  pre_build:
     commands:
-      - echo "Installing dependencies..."
-      - pip install -r requirements.txt
+      - pip install -r requirements.txt -t .
   build:
     commands:
       - echo "Running tests..."
       # pytest  # (optional, if you have tests)
-  post_build:
-    commands:
-      - echo "Build completed. Preparing artifacts..."
+      - echo "Build complete"
 artifacts:
   files:
     - '**/*'
