@@ -6,7 +6,7 @@ from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import Optional   # ✅ added for Python 3.9 compatibility
+from typing import Optional   # added for Python 3.9 compatibility
 import schemas, models
 from database import get_db
 from crud import get_user_by_username
@@ -37,7 +37,7 @@ def authenticate_user(db: Session, username: str, password: str):
 
 
 # Create JWT access token.
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):   # ✅ fixed
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):   # fixed
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
