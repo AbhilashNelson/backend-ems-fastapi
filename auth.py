@@ -6,6 +6,7 @@ from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from typing import Optional   # ✅ added for Python 3.9 compatibility
 import schemas, models
 from database import get_db
 from crud import get_user_by_username
@@ -26,6 +27,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
 def verify_password(plain_password: str, hashed_password: str):
     return pwd_context.verify(plain_password, hashed_password)
 
+
 # Authenticate user by username and password.
 def authenticate_user(db: Session, username: str, password: str):
     user = get_user_by_username(db, username)
@@ -33,8 +35,9 @@ def authenticate_user(db: Session, username: str, password: str):
         return False
     return user
 
+
 # Create JWT access token.
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):   # ✅ fixed
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
@@ -43,6 +46,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
 
 # Get current user from JWT token.
 async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
