@@ -27,7 +27,7 @@ app.add_middleware(
 # Root endpoint.
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to EMS FastAPI"}
+    return {"message": "Welcome to AWS Hosted EMS FastAPI"}
 
 # Signup endpoint.
 @app.post("/auth/signup", response_model=schemas.User)
