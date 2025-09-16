@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user/backend-ems-fastapi
+    destination: /home/ec2-user/backend
 hooks:
   BeforeInstall:
     - location: scripts/stop_server.sh
