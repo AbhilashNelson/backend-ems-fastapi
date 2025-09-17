@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e  # exit if any command fails
 
+# Ensure ec2-user owns the project folder
+sudo chown -R ec2-user:ec2-user /home/ec2-user/backend
+cd /home/ec2-user/backend
+
 # Go to project directory (adjust if needed)
 cd /home/ec2-user/backend
 
